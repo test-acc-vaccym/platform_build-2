@@ -522,11 +522,11 @@ $(hide) echo '' >> $5
 
 endef
 
-name := $(TARGET_PRODUCT)
+name := $(TARGET_DEVICE)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-apkcerts-$(FILE_NAME_TAG)
+name := $(name)-apkcerts-$(PLATFORM_VERSION)-$(BUILD_ID)-$(shell date -u +%Y%m%d)
 intermediates := \
 	$(call intermediates-dir-for,PACKAGING,apkcerts)
 APKCERTS_FILE := $(intermediates)/$(name).txt
@@ -2445,11 +2445,11 @@ endif # build_ota_package
 # This zip can be used to create an OTA package or filesystem image
 # as a post-build step.
 #
-name := $(TARGET_PRODUCT)
+name := $(TARGET_DEVICE)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-target_files-$(FILE_NAME_TAG)
+name := $(name)-target_files-$(PLATFORM_VERSION)-$(BUILD_ID)-$(shell date -u +%Y%m%d)
 
 intermediates := $(call intermediates-dir-for,PACKAGING,target_files)
 BUILT_TARGET_FILES_PACKAGE := $(intermediates)/$(name).zip
@@ -2875,11 +2875,11 @@ ifeq ($(build_ota_package),true)
 # -----------------------------------------------------------------
 # OTA update package
 
-name := $(TARGET_PRODUCT)
+name := $(TARGET_DEVICE)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-ota-$(FILE_NAME_TAG)
+name := $(name)-ota-$(PLATFORM_VERSION)-$(BUILD_ID)-$(shell date -u +%Y%m%d)
 
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
@@ -2911,11 +2911,11 @@ endif    # build_ota_package
 # -----------------------------------------------------------------
 # The update package
 
-name := $(TARGET_PRODUCT)
+name := $(TARGET_DEVICE)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-img-$(FILE_NAME_TAG)
+name := $(name)-img-$(PLATFORM_VERSION)-$(BUILD_ID)-$(shell date -u +%Y%m%d)
 
 INTERNAL_UPDATE_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
@@ -2931,11 +2931,11 @@ updatepackage: $(INTERNAL_UPDATE_PACKAGE_TARGET)
 # A zip of the symbols directory.  Keep the full paths to make it
 # more obvious where these files came from.
 #
-name := $(TARGET_PRODUCT)
+name := $(TARGET_DEVICE)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-symbols-$(FILE_NAME_TAG)
+name := $(name)-symbols-$(PLATFORM_VERSION)-$(BUILD_ID)-$(shell date -u +%Y%m%d)
 
 SYMBOLS_ZIP := $(PRODUCT_OUT)/$(name).zip
 # For apps_only build we'll establish the dependency later in build/make/core/main.mk.
@@ -2982,11 +2982,11 @@ $(COVERAGE_ZIP): $(SOONG_ZIP)
 # A zip of the Android Apps. Not keeping full path so that we don't
 # include product names when distributing
 #
-name := $(TARGET_PRODUCT)
+name := $(TARGET_DEVICE)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-apps-$(FILE_NAME_TAG)
+name := $(name)-apps-$(PLATFORM_VERSION)-$(BUILD_ID)-$(shell date -u +%Y%m%d)
 
 APPS_ZIP := $(PRODUCT_OUT)/$(name).zip
 $(APPS_ZIP): $(INSTALLED_SYSTEMIMAGE)
